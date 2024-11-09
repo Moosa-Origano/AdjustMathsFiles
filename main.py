@@ -117,7 +117,6 @@ cursor.execute(create_question_table)
 
 # conn.commit()
 
-print ("hello world")
 
 
 resolutionwindow = ctk.CTk()
