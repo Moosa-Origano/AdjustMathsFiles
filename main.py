@@ -3699,9 +3699,6 @@ class Teacher: # Class with all data associated with
 
 
 
-
-
-
     def ViewStudentsPage(self, classid): # page that allows the teacher to view all the Student details
 
         self.page_clearer() # empties the window
