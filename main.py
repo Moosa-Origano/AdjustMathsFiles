@@ -800,7 +800,7 @@ class Student: # class with everything associated with a Student
 
 
     # function creating all the data for the student graphs
-    def data_maker(self, graph_type): # 
+    def data_maker(self, graph_type): # creates the data for the student graphs from the Db
 
 
         information_array = np.full((6, 2), None) # making an array with required dimensions, and filling it with nothing
@@ -909,7 +909,7 @@ class Student: # class with everything associated with a Student
 
 
 
-    def graph_maker(self, graph, x_values, y_values, Title): # add x and y values from database as parameters
+    def graph_maker(self, graph, x_values, y_values, Title): # this actually creates the graphs using the provided data
 
 
         facecolor_var = "white" # setting to a variable to allow customization
@@ -939,7 +939,7 @@ class Student: # class with everything associated with a Student
 
 
 
-    def topic_selection(self):
+    def topic_selection(self): # page allowing the user to choose a topic and a number of questions
         self.page_clearer(self.window) # using the page_clearer function from the original application
         self.no_of_questions = 1
 
@@ -1001,7 +1001,7 @@ class Student: # class with everything associated with a Student
 
 
 
-    def auto_questions(self):
+    def auto_questions(self): # page using the linear regression model to choose questions for the user
         self.page_clearer(self.window)
 
         def LinearRegressionModel():
@@ -1236,13 +1236,7 @@ class Student: # class with everything associated with a Student
             
 
 
-
-
-
-
-
-
-    def leaderboard(self):
+    def leaderboard(self): # leaderboard page for the student's class
         self.page_clearer(self.window)  # Empties the window
 
         ViewStudentsStatement = "SELECT StudentID, FirstName, Username FROM Students WHERE ClassID = ?" # retrieves the necessary information from table
@@ -1328,7 +1322,7 @@ class Student: # class with everything associated with a Student
 
 
 
-class Questions():
+class Questions(): # class with everything associated with Questions being created
     def __init__(self, window, cursor, student_id, chosen_topic, username, no_of_questions, **kwargs): 
         self.student_id = student_id # passing the student's username for database functions, the cursor to manipulate the databse, and the window to display visualisations.
         self.cursor = cursor
@@ -1352,12 +1346,12 @@ class Questions():
         self.QuestionChooser()
 
 
-    def page_clearer(self, window):
+    def page_clearer(self, window): # deletes all widgets on a page
         for widget in self.window.winfo_children():
             widget.destroy()
 
 
-    def QuestionChooser(self):
+    def QuestionChooser(self): # depending on the parameter passed to the class, this will call the chosen topic function
 
         if self.chosen_topic == "Number":
             self.Number()
@@ -1407,7 +1401,7 @@ class Questions():
         back_button = ctk.CTkButton(finish_frame, text = "Back", fg_color="#4169E1", command= lambda: [Student(self.window, self.cursor, self.username), Student.student_home_screen]) # summons the class, and the page within it
         back_button.pack(pady = 20)
 
-    def QuestionCreator(self, QuestionText, Answer, Notes, grade, topic_id, **kwargs):
+    def QuestionCreator(self, QuestionText, Answer, Notes, grade, topic_id, **kwargs): # the main function which creates Questions with the provided passed parameters from each question
 
         
         
@@ -1592,7 +1586,7 @@ class Questions():
 
 
 
-    def Quicksort(self, S):
+    def Quicksort(self, S): # A quicksort which sorts data
         if len(S) <= 1:  # Base case, return if the list is empty or has one element
             return S
 
@@ -1622,7 +1616,7 @@ class Questions():
 
 
 
-    def Date(self):
+    def Date(self): # Assigns the current date to a variable 
         self.todays_date = datetime.now().date()
 
     def random_integer(self, start, end): # function which creates random integers
@@ -1661,7 +1655,7 @@ class Questions():
         
 
 
-    def Number(self):
+    def Number(self): # Number section of the course
         self.page_clearer(self)
 
 
@@ -1983,7 +1977,7 @@ class Questions():
 
     
 
-    def Algebra(self):
+    def Algebra(self): # Algebra section of the course
         self.page_clearer(self)
 
 
@@ -2532,7 +2526,7 @@ class Questions():
         ChoosingQuestion()
 
 
-    def Ratio(self):
+    def Ratio(self): # Ratio section of the course
         self.page_clearer(self.window)
 
 
@@ -2691,7 +2685,7 @@ class Questions():
 
 
 
-    def Geometry(self):
+    def Geometry(self): # Geometry section of the course
         self.page_clearer(self)
 
         def InteriorAngle():
@@ -3236,7 +3230,7 @@ class Questions():
         
         ChoosingQuestion()
 
-    def Probability(self):
+    def Probability(self): # Probability section of the course
         self.page_clearer(self)
 
 
@@ -3295,7 +3289,7 @@ class Questions():
         ChoosingQuestion()
 
 
-    def Statistics(self):
+    def Statistics(self): # Statistics section fo the course
 
         self.page_clearer(self)
 
@@ -3375,7 +3369,7 @@ class Questions():
 
 
 
-class Teacher:
+class Teacher: # Class with all data associated with 
     def __init__(self, window, cursor, username):
         self.username = username
         self.cursor = cursor
@@ -3399,13 +3393,13 @@ class Teacher:
 
 
 
-    def page_clearer(self):
+    def page_clearer(self): # function that clears all widgets on a page
         for widget in self.window.winfo_children():
             widget.destroy()
 
 
 
-    def leaderboard(self, class_id):
+    def leaderboard(self, class_id): # leaderboard for the teacher's chosen class
         self.page_clearer()  # Empties the window
 
         ViewStudentsStatement = "SELECT StudentID, FirstName, Username FROM Students WHERE ClassID = ?" # retrieves the necessary information from table
@@ -3541,7 +3535,7 @@ class Teacher:
     
 
 
-    def ClassInformation(self, class_id):
+    def ClassInformation(self, class_id): # creates graphs for chosen class
         
         # getting the information for all students in the specified class
         student_query = "SELECT StudentID, FirstName, LastName FROM Students WHERE ClassID = ?" 
@@ -3643,7 +3637,7 @@ class Teacher:
         canvas.get_tk_widget().pack(side="left", padx=3) # packing the graph itself
 
 
-    def home_page(self):
+    def home_page(self): # teacher's home page
         self.page_clearer()
         
 
@@ -3708,7 +3702,7 @@ class Teacher:
 
 
 
-    def ViewStudentsPage(self, classid):
+    def ViewStudentsPage(self, classid): # page that allows the teacher to view all the Student details
 
         self.page_clearer() # empties the window
 
@@ -3754,14 +3748,6 @@ class Teacher:
         back_button.pack(padx = 10, pady = 15) # creating a back button to go to the homepage
 
 
-
-
-
-    def StudentGraphs(self):
-        self.page_clearer(self.window)
-
-        back_button = ctk.CTkButton(self.window, text = "Back", command = self.home_page, fg_color="#4169E1") #
-        back_button.pack(padx = 10, pady = 15) # creating a back button to go to the homepage
 
 
     def Change_Details(self): # function which allows the user to change their details
