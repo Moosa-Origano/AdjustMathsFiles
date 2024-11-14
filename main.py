@@ -128,8 +128,8 @@ screen_height = resolutionwindow.winfo_screenheight()
 
 
 
-class AdjustMaths:
-    def __init__(self):
+class AdjustMaths: # class for creating the main functions not associated with any section (questions, students, teachers) of the code
+    def __init__(self): 
         self.conn = conn
         self.cursor = self.conn.cursor()
 
@@ -150,12 +150,12 @@ class AdjustMaths:
         self.login_page() # calling the first method, the login page.
 
 
-    def page_clearer(self, window):
+    def page_clearer(self, window): # function that deletes pages
         for widget in window.winfo_children():
             widget.destroy()
 
 
-    def login_page(self):
+    def login_page(self): # function to create the login page
         self.page_clearer(self.window)
 
         # Set window size
@@ -196,7 +196,7 @@ class AdjustMaths:
 
 
 
-    def login_check(self):
+    def login_check(self): # function that checks the user's login information
         # Getting the username and password from the input boxes
         username = self.u_enter.get()
         password = self.P_enter.get()
@@ -241,16 +241,12 @@ class AdjustMaths:
         else:
             self.u_enter.configure(fg_color="#f8d7da")  # Highlight username field
 
-    
-
-
-
-   
 
 
 
 
-    def wrong_info(self, Text): # makes a popup that the wrong password has been entered
+
+    def wrong_info(self, Text): # makes a popup that wrong information has been entered
         popup = ctk.CTkToplevel() # will show up above the current window
         popup.title(f"{Text}")
 
@@ -269,8 +265,7 @@ class AdjustMaths:
 
 
 
-
-    def student_signup(self): # needs code
+    def student_signup(self): # student signing up page
 
 
         self.page_clearer(self.window)
@@ -347,8 +342,7 @@ class AdjustMaths:
 
 
 
-
-    def teacher_signup(self):
+    def teacher_signup(self): # teacher signing up page
 
 
         self.page_clearer(self.window)
@@ -427,14 +421,9 @@ class AdjustMaths:
         back_button.pack(side = "left", padx= 15)
 
 
-       
 
 
-
-
-
-
-    def signup_check(self, student_or_teacher):
+    def signup_check(self, student_or_teacher): # checks the signup information ensuring that it is valid
         firstname = ""
         lastname = ""
         dob = ""
@@ -642,7 +631,7 @@ class AdjustMaths:
 
 
                
-    def run(self):
+    def run(self): # runs the UI
         self.window.mainloop() # actually runs everything..
 
 
@@ -650,7 +639,7 @@ class AdjustMaths:
 
 
 
-class Student:
+class Student: # class with everything associated with a Student
     def __init__(self, window, cursor, username):
         self.username = username # passing the student's username for database functions, the cursor to manipulate the databse, and the window to display visualisations.
         self.cursor = cursor
@@ -673,14 +662,14 @@ class Student:
 
 
 
-    def page_clearer(self, window):
+    def page_clearer(self, window): # deletes all the widgets on a page
         for widget in window.winfo_children():
             widget.destroy()
 
 
 
 
-    def student_home_screen(self):
+    def student_home_screen(self): # student's home screen page
         self.page_clearer(self.window)
 
     
@@ -811,7 +800,7 @@ class Student:
 
 
     # function creating all the data for the student graphs
-    def data_maker(self, graph_type):
+    def data_maker(self, graph_type): # 
 
 
         information_array = np.full((6, 2), None) # making an array with required dimensions, and filling it with nothing
